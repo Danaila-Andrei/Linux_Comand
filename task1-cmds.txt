@@ -1,0 +1,190 @@
+1-lshw -short
+H/W path          Device      Class       Description
+=====================================================
+                              system      VirtualBox
+/0                            bus         VirtualBox
+/0/0                          memory      128KiB BIOS
+/0/1                          memory      5GiB System memory
+/0/2                          processor   Intel(R) Core(TM) i5-9300H CPU @ 2.40G
+/0/100                        bridge      440FX - 82441FX PMC [Natoma]
+/0/100/1                      bridge      82371SB PIIX3 ISA [Natoma/Triton II]
+/0/100/1/0                    input       PnP device PNP0303
+/0/100/1/1                    input       PnP device PNP0f03
+/0/100/1.1        scsi1       storage     82371AB/EB/MB PIIX4 IDE
+/0/100/1.1/0.0.0  /dev/cdrom  disk        CD-ROM
+/0/100/2          /dev/fb0    display     SVGA II Adapter
+/0/100/3          enp0s3      network     82540EM Gigabit Ethernet Controller
+/0/100/4          input8      input       VirtualBox mouse integration
+/0/100/5          card0       multimedia  82801AA AC'97 Audio Controller
+/0/100/6                      bus         KeyLargo/Intrepid USB
+/0/100/6/1        usb1        bus         OHCI PCI host controller
+/0/100/6/1/1      input6      input       VirtualBox USB Tablet
+/0/100/7                      bridge      82371AB/EB/MB PIIX4 ACPI
+/0/100/b                      bus         82801FB/FBM/FR/FW/FRW (ICH6 Family) US
+/0/100/b/1        usb2        bus         EHCI Host Controller
+/0/100/d          scsi2       storage     82801HM/HEM (ICH8M/ICH8M-E) SATA Contr
+/0/100/d/0.0.0    /dev/sda    disk        26GB VBOX HARDDISK
+/0/100/d/0.0.0/1  /dev/sda1   volume      1023KiB BIOS Boot partition
+/0/100/d/0.0.0/2  /dev/sda2   volume      512MiB Windows FAT volume
+/0/100/d/0.0.0/3  /dev/sda3   volume      24GiB EXT4 volume
+/1                input0      input       Power Button
+/2                input1      input       Sleep Button
+/3                input2      input       AT Translated Set 2 keyboard
+/4                input4      input       Video Bus
+/5                input5      input       ImExPS/2 Generic Explorer Mouse
+
+2-sudo lshw -class disk -class storage
+ *-cdrom                   
+       description: DVD reader
+       product: CD-ROM
+       vendor: VBOX
+       physical id: 0.0.0
+       bus info: scsi@1:0.0.0
+       logical name: /dev/cdrom
+       logical name: /dev/sr0
+       version: 1.0
+       capabilities: removable audio dvd
+       configuration: ansiversion=5 status=nodisc
+  *-disk
+       description: ATA Disk
+       product: VBOX HARDDISK
+       vendor: VirtualBox
+       physical id: 0.0.0
+       bus info: scsi@2:0.0.0
+       logical name: /dev/sda
+       version: 1.0
+       serial: VB9e8259cc-a7a88ee0
+       size: 25GiB (26GB)
+       capabilities: gpt-1.00 partitioned partitionecad:gpt
+       configuration: ansiversion=5 guid=faa7725d-795d-4bfb-9bc6-eed833a80a40 logicalsectorsize=512 sectorsize=512
+
+3-sudo lshw -html -class network
+sage: sudo -h | -K | -k | -V
+usage: sudo -v [-ABknS] [-g group] [-h host] [-p prompt] [-u user]
+usage: sudo -l [-ABknS] [-g group] [-h host] [-p prompt] [-U user] [-u user]
+            [command]
+usage: sudo [-ABbEHknPS] [-r role] [-t type] [-C num] [-D directory] [-g group]
+            [-h host] [-p prompt] [-R directory] [-T timeout] [-u user]
+            [VAR=value] [-i|-s] [<command>]
+usage: sudo -e [-ABknS] [-r role] [-t type] [-C num] [-D directory] [-g group]
+            [-h host] [-p prompt] [-R directory] [-T timeout] [-u user] file ..
+4-lshw -disable dmiq
+
+
+5-touch fisier1.txt
+find fisier1.text
+find -name "*.txt"
+find -name "*.txt"| wc -l
+find -type d
+find -type d|wc -l 
+mkdir test
+find -name "test"
+find test 
+6-GREP
+ mkdir test
+touch test/ex1 test/.ex2 test/.ex3
+ls  -A test |grep "^\." 
+grep "hello" f2
+grep -c "e" f2
+grep -E "G|C" f2
+grep -EC "g|c" f2
+grep -vE "g|i" f2
+7-ssh
+ssh andrei@127.0.0.1
+sudo systemctl status sshd
+8-tar
+touch fis1 fis2 fis3
+tar -cvf arhiva.tar fis1 fis2 fis3
+tar -xvf arhiva.tar
+tar -tvf arhiva.tar
+tar --delete -f arhiva.tar fis1 fis2 //delete fis1,fis2
+tar tf arhiva.tar
+9-sudo
+sudo apt update
+sudo apt install python3.1
+sudo systemctl status sshd
+sudo lshw -html -class network
+10-top
+top -o %CPU
+top -c
+top -b -n 1 > procese.txt
+cat procese.txt
+11-chmod
+chmod 000 f2 
+chmod o-wx f2
+chmod 600 f1
+chmod go+r f1
+chmod 200 f1
+chmod 400 f1
+12-chown
+sudo groupadd nou_grup
+sudo chown :nou_grup f4
+chown -v :nou_grup f4 :proprietarul lui 'f4' rămâne andrei:nou_grup
+sudo chown nou_utlizator:nou_grup f4
+13-cp
+cp f2 f1
+mkdir locatie
+cp f1 f2 locatie
+cp -v f1 f2 
+cp -a locatie locatie_secundara
+cp -b f1 locatie
+cp --attributes-only f1 f2
+14-mv
+mv f1 f2
+mv dir1 dir2
+mv f1 f2 dir2
+mv -i f1 f2
+mv -f f2 locatie_secundara
+15-rm
+rm -r locatie
+rm f2
+rmdir dir_gol
+15-cd
+cd mac
+cd eu
+cd ~
+16-mkdir
+mkdir abc
+mkdir -p dir3{dir4,dir5}
+mkdir -m 000 dir7
+17-touch
+touch test/ex1 test/.ex2 test/.ex3
+touch f1
+touch -a f1
+touch -m f1
+18 ls/ls -lh
+ls -l
+ls -d
+ls -a
+ls -lh | wc -l
+ls -lh | sort
+
+19-strace uname -command displays all system calls made by uname in detail, for example: kernel name, kernel version, hardware information
+strace touch fis3.txt
+strace logname
+20-ltrace uname -follows the call of uname functions
+ltrace login
+ltrace touch
+ltrace mkdir
+!!!!strace focuses on the program's interaction with the operating system, while ltrace focuses on the program's interaction with libraries
+20-Vi
+Vi it is an editor of text
+vi fis.txt
+vi -D script.vim- debugg mod
+vi -b binarry.bin
+vi -g o carry out this command I installed a version of vim with a graphical interface because linux does not have a default one, for this I used the command -sudo apt-get install vim-gtk3-
+(which I got from the internet).
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
