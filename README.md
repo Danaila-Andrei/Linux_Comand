@@ -1,0 +1,5 @@
+[task3-ssh.txt](https://github.com/Danaila-Andrei/Linux_Command/files/14950304/task3-ssh.txt)
+[task3-hello.txt](https://github.com/Danaila-Andrei/Linux_Command/files/14950306/task3-hello.txt)
+![Captură de ecran de la 2024-04-07 21-50-50](https://github.com/Danaila-Andrei/Linux_Command/assets/147686977/8a22ee68-a507-4ba9-b9bd-3cacb8f6b97f)
+![Captură de ecran de la 2024-04-11 21-47-09](https://github.com/Danaila-Andrei/Linux_Command/assets/147686977/82facdd7-f130-425b-9042-3939de1ff1c4)
+![Captură de ecran de la 2024-04-11 16-52-53](https://github.com/Danaila-Andrei/Linux_Command/assets/147686977/54d86a23-f08b-44e5-aa9c-242630ce34af)
