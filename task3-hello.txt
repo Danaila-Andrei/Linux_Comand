@@ -1,2 +1,77 @@
-[task3-hello.txt](https://github.com/Danaila-Andrei/Linux_Command/files/14950306/task3-hello.txt)
-![Captură de ecran de la 2024-04-11 21-47-09](https://github.com/Danaila-Andrei/Linux_Command/assets/147686977/14af9ead-40d9-49e9-bcb5-31c34e50eac8)
+1.Instalation podman
+-sudo apt-get update
+-sudo apt-get install -y podman
+I took these two orders from the documentation found on the Podman website
+The first command i use for update the system packages and the last i use to install podman
+2.Use a Dockerfile to install the necessary tools for compiling the C++ "Hello, World!" program.
+ first of all i use mkdir Dockerfile for the create a directory with name Dockerfile
+ -cd Dockerfile-i changed the working directory using the cd command
+ -nano Dockerfile-with the nano command I opened a text editor and at the same time created a file called Dockerfile
+ in the new file with name Dockerfile i write the command necessary to compile c++:
+ -FROM docker.io/library/gcc:latest-this command creates a basic image required for c++ compilation:
+ FROM -is a command that specifies the base image that I will use
+ docker.io/library/gcc:latest-specifies the full name of the base image. 
+ doker.io-is the name of the repository,library/gcc indicates that we want to use the initial image of the gcc compiler
+ latest-is a tag that in the present case shows us the latest version of the images
+ RUN apt-get update && \
+    apt-get install -y \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+Updates the package list and installs the packages needed to compile C++
+apt-get update it use for uptdate the packages
+apt-get insall -y g++  this command is necessary to install g++ this is the package name of the GNU C++ compiler. 
+rm -rf /var/lib/apt/lists/*  this command forces the recursive deletion of data from directory
+COPY main.cpp . -Copy the source file of the program "Hello, World!" in the container's working directory
+RUN g++ -o hello main.cpp -compile the program written in the main.cpp file
+RUN-tells Docker to run the specified command
+g++ indicates that the GNU C++ (g++) compiler is to be used to compile the source code.
+- o hello:This option indicates the name of the resulting executable file after compilation
+main.cpp-it is the code source of program
+CMD ["./hello]
+CMD a statement in a Dockerfile that indicates the default command to run when a container is started
+ ./hello command specifies that the hello executable in the current directory should be run inside the container
+ I open file name main.cpp with a text editor name nano
+ nano main.cpp
+ in this code I wrote the c++ code necessary to display the hello word
+ #include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+ 
+podman run nume_imaginii in this command I run the file modified with name Dockerfile.
+3.Create a Debian 12 ("debian12") rootless container image from a Dockerfile using the command: "podman build -t debian12 -f Dockerfile-debian12".
+first i creat a file name Dockerfile-debian12
+i open with an text editor i write FROM debian:12 indicates that the image is taken from the official Debian repository, and 12 is the version of debian.
+podman build -t debian12 -f Dockerfile-debian12 -podman build command for build,-t idindicate what name the resulting image takes, -f Dockerfile-debian12 this option specifies the Dockerfile that Podman should use to build the image.
+Compile and run the C++ "Hello, World!" program inside the "debian12" container using Podman.
+podman run -it debian12
+this command creates an interactive shell inside the container
+nano main.cpp
+I created a file in which to insert the code necessary for the hello word childhood
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+g++ -o hello main.cpp
+this command will compile the file "main.cpp" and generate an executable called "hello".
+./hello it use to run the file
+5.Find a method to run the OpenSSH server (sshd) inside the container. 
+apt-get install -y openssh-server to install openssh-server
+service ssh start  to start the ssh server
+Starting OpenBSD Secure Shell server: sshd.
+6.Optionally, run the OpenSSH server (sshd) in the container in debug mode (e.g., `/usr/sbin/sshd -d -p 2222`). 
+/usr/sbin/sshd: This is the path to the sshd executable,
+-d: This option starts sshd in debug mode, 
+-p 2222: This option specifies that port 2222 on the host is associated with port 22 on the container
+
+
+
+
+
+
+
+
