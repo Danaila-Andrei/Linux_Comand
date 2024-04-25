@@ -1,0 +1,120 @@
+ 1.For the first demonstration I ran the script normally, after the script ran I deleted the directories where the repositories were and ran the script again to show that the script will detect that the files are no longer there and will clone them again.
+ 
+ 
+ bash up.sh
+Cloning into 'linux'...
+remote: Enumerating objects: 10112192, done.
+remote: Counting objects: 100% (186/186), done.
+remote: Compressing objects: 100% (102/102), done.
+remote: Total 10112192 (delta 98), reused 124 (delta 84), pack-reused 10112006
+Receiving objects: 100% (10112192/10112192), 4.83 GiB | 6.25 MiB/s, done.
+Resolving deltas: 100% (8240469/8240469), done.
+Updating files: 100% (84340/84340), done.
+Cloning into 'glibc'...
+remote: Enumerating objects: 721249, done.
+remote: Counting objects: 100% (32309/32309), done.
+remote: Compressing objects: 100% (8290/8290), done.
+remote: Total 721249 (delta 24230), reused 30094 (delta 23450), pack-reused 688940
+Receiving objects: 100% (721249/721249), 274.62 MiB | 8.48 MiB/s, done.
+Resolving deltas: 100% (613267/613267), done.
+Updating files: 100% (19624/19624), done.
+# Ștergem directoarele `linux` și `glibc`
+rm -rf linux glibc
+
+# Rulăm scriptul
+bash up.sh
+Cloning into 'linux'...
+remote: Enumerating objects: 10112192, done.
+remote: Counting objects: 100% (186/186), done.
+remote: Compressing objects: 100% (102/102), done.
+remote: Total 10112192 (delta 98), reused 117 (delta 84), pack-reused 10112006
+Receiving objects: 100% (10112192/10112192), 4.82 GiB | 6.51 MiB/s, done.
+Resolving deltas: 100% (8240979/8240979), done.
+Updating files: 100% (84340/84340), done.
+Cloning into 'glibc'...
+remote: Enumerating objects: 721249, done.
+remote: Counting objects: 100% (32332/32332), done.
+remote: Compressing objects: 100% (7735/7735), done.
+remote: Total 721249 (delta 24522), reused 30306 (delta 24028), pack-reused 688917
+Receiving objects: 100% (721249/721249), 274.06 MiB | 6.38 MiB/s, done.
+Resolving deltas: 100% (613606/613606), done.
+Updating files: 100% (19624/19624), done.
+2.For the second demonstration, I disabled the wlo1 interface thus stopping the internet connection, I used the command sudo ip link set wlo1 down
+The obtained result is recorded in journalctl
+863  sudo ip link set wlo1 down
+864  ./up.sh
+The informations on the therminal are:
+./up.sh
+ping: google.com: Eșec temporar în rezolvarea numelui
+ping: google.com: Eșec temporar în rezolvarea numelui
+ping: google.com: Eșec temporar în rezolvarea numelui
+ping: google.com: Eșec temporar în rezolvarea numelui
+The informations in the journalctl are:
+apr 25 17:24:27 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6141]: up.sh: Scriptul a început
+apr 25 17:24:42 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6149]: up.sh: Nu există conectivitate la rețea timp de 15 secunde. Se anulează actualizarea.
+3-I turned off the Internet manually and then after a few seconds I turned it on. The script detects that the Internet has stopped and gives the related error, but after I turn on the Internet it continues its activity normally
+./up.sh
+ping: google.com: Eșec temporar în rezolvarea numelui
+ping: google.com: Eșec temporar în rezolvarea numelui
+ping: google.com: Eșec temporar în rezolvarea numelui
+Already up to date.
+remote: Enumerating objects: 40, done.
+remote: Counting objects: 100% (40/40), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 40 (delta 31), reused 40 (delta 31), pack-reused 0
+Unpacking objects: 100% (40/40), 10.41 KiB | 47.00 KiB/s, done.
+From https://github.com/bminor/glibc
+   f4724843ad..41903cb6f4  master     -> origin/master
+Updating f4724843ad..41903cb6f4
+Fast-forward
+ advisories/GLIBC-SA-2024-0004                            |   1 +
+ benchtests/bench-strstr.c                                |  27 +++++++++++++++++++++++++++
+ config.h.in                                              |   3 +++
+ manual/tunables.texi                                     |   5 ++++-
+ sysdeps/loongarch/Makefile                               |  12 ++++++++++++
+ sysdeps/loongarch/cpu-tunables.c                         |  87 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ sysdeps/loongarch/dl-get-cpu-features.c                  |  25 +++++++++++++++++++++++++
+ sysdeps/loongarch/dl-machine.h                           |  29 ++++++++++++++++++++++++-----
+ sysdeps/loongarch/dl-tunables.list                       |  25 +++++++++++++++++++++++++
+ sysdeps/loongarch/lp64/multiarch/dl-symbol-redir-ifunc.h |   3 +++
+ sysdeps/loongarch/tst-hwcap-tunables.c                   | 136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ sysdeps/unix/sysv/linux/loongarch/cpu-features.c         |  30 ++++++++++++++++++++++++++++++
+ sysdeps/unix/sysv/linux/loongarch/cpu-features.h         |  17 ++++++++++++++---
+ sysdeps/unix/sysv/linux/loongarch/dl-procinfo.c          |  60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ sysdeps/unix/sysv/linux/loongarch/dl-sysdep.c            |  21 +++++++++++++++++++++
+ sysdeps/unix/sysv/linux/loongarch/libc-start.c           |  34 ++++++++++++++++++++++++++++++++++
+ sysdeps/x86/configure                                    |   7 +++++++
+ sysdeps/x86/configure.ac                                 |   5 +++++
+ sysdeps/x86/isa-level.h                                  |   4 +++-
+ 19 files changed, 521 insertions(+), 10 deletions(-)
+ create mode 100644 sysdeps/loongarch/cpu-tunables.c
+ create mode 100644 sysdeps/loongarch/dl-get-cpu-features.c
+ create mode 100644 sysdeps/loongarch/dl-tunables.list
+ create mode 100644 sysdeps/loongarch/tst-hwcap-tunables.c
+ create mode 100644 sysdeps/unix/sysv/linux/loongarch/cpu-features.c
+ create mode 100644 sysdeps/unix/sysv/linux/loongarch/dl-procinfo.c
+ create mode 100644 sysdeps/unix/sysv/linux/loongarch/dl-sysdep.c
+ create mode 100644 sysdeps/unix/sysv/linux/loongarch/libc-start.c
+ Information of the journalctl:
+ apr 25 17:24:27 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6141]: up.sh: Scriptul a început
+apr 25 17:24:42 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6149]: up.sh: Nu există conectivitate la rețea timp de 15 secunde. Se anulează actualizarea.
+apr 25 17:31:41 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6401]: up.sh: Scriptul a început
+apr 25 17:31:51 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6453]: up.sh: Se actualizează linux
+apr 25 17:31:57 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6462]: up.sh: Se actualizează glibc
+apr 25 17:32:04 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6494]: up.sh: Scriptul a sfârșit
+
+4-For a new test, I opened two terminals and ran the script at the same time with a maximum difference of one second.
+For the first terminal on which I run the code, it works without problems.
+./up.sh
+Already up to date.
+Already up to date.
+In the second terminal, the script does not run
+The information on the journalctl are:
+apr 25 17:38:49 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6629]: up.sh: Se actualizează glibc
+apr 25 17:38:50 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6636]: up.sh: O altă instanță a scriptului rulează deja. Se încheie.
+apr 25 17:38:50 andrei-TUF-Gaming-FX505GT-FX505GT andrei[6640]: up.sh: Scriptul a sfârșit
+
+
+
+
+
