@@ -1,0 +1,28 @@
+In order to implement the script to run automatically at 1 AM, I used the 'cron' task scheduler. I first ran the crontab -e command to edit the task scheduler, I also chose the nano text editor and then I scrolled down the page where I wrote the commnad: 0 1 * * * /home/andrei/up.sh
+Personally, I didn't just schedule the command at 1 AM, I had the script run at different times. To implement the automatic running of the script at set times, I also found the at command. The difference between at command and cron is that: at make a single schedule, crontab command will repeatedly run the program, but if the computer is closed, the cron command will not run instead, the at command will run when the computer is open.
+Examples of how I used the cron command:
+crontab -e
+09 19  * * * /home/andrei/up.sh
+in this example the script will run at the hour 19:18
+apr 25 19:09:01 andrei-TUF-Gaming-FX505GT-FX505GT CRON[4919]: (andrei) CMD (/home/andrei/up.sh)
+apr 25 19:09:01 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4922]: up.sh: Scriptul a început
+apr 25 19:09:01 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4924]: up.sh: Se actualizează linux
+apr 25 19:09:02 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4933]: up.sh: Se actualizează glibc
+apr 25 19:09:04 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4942]: up.sh: Scriptul a sfârșit
+Exemple of how I used the at command:
+echo "/home/andrei/up.sh" |at 19:14
+
+apr 25 19:14:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4975]: up.sh: Scriptul a început
+apr 25 19:14:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4978]: up.sh: Se actualizează linux
+apr 25 19:14:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4987]: up.sh: Se actualizează glibc
+apr 25 19:14:01 andrei-TUF-Gaming-FX505GT-FX505GT andrei[4996]: up.sh: Scriptul a sfârșit
+
+echo "/home/andrei/up.sh" |at 1:00
+apr 26 01:00:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[7899]: up.sh: Scriptul a început
+apr 26 01:00:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[7902]: up.sh: Se actualizează linux
+apr 26 01:00:00 andrei-TUF-Gaming-FX505GT-FX505GT andrei[7911]: up.sh: Se actualizează glibc
+apr 26 01:00:01 andrei-TUF-Gaming-FX505GT-FX505GT andrei[7920]: up.sh: Scriptul a sfârșit
+
+
+
+
